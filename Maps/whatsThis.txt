@@ -1,0 +1,3 @@
+These are the maps inside the office that are recorded using the Rplidar as a sensor and Hector Mapping as the package.
+Odometry data from the robot is used to estimate current pose of the robot with reference to the initial pose.
+Logitec Joystic is used to navigate the robot around the office in order to create the maps.
