@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <!-- Run the map server -->
+   <!--node name="map_server" pkg="map_server" type="map_server" args="map.yaml" output="screen"/-->
+  <!--<node name="map_server" pkg="map_server" type="map_server" args="/home/aneesh1993/catkin_ws/map.yaml"/>-->
+
+  <!--node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 /map /odom 1000"/-->
+
+  <include file="/opt/ros/hydro/share/amcl/examples/amcl_diff.launch" >
+  </include>
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <!--<param name="footprint_padding" value="0.01" />-->
+    <param name="controller_frequency" value="20.0"/>
+    <param name="controller_patience" value="15.0"/>
+    <!--<param name="planner_frequency" value="1.0" />-->
+    <rosparam file="/home/aneesh1993/catkin_ws/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="/home/aneesh1993/catkin_ws/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="/home/aneesh1993/catkin_ws/local_costmap_params.yaml" command="load" />
+    <rosparam file="/home/aneesh1993/catkin_ws/global_costmap_params.yaml" command="load" />
+    <rosparam file="/home/aneesh1993/catkin_ws/base_local_planner_params.yaml" command="load" />
+
+    <!--<param name="base_global_planner" type="string" value="navfn/NavfnROS" />
+    <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>-->
+
+    <remap from="cmd_vel" to="RosAria/cmd_vel" />
+  </node>
+
+
+</launch>
